@@ -1,0 +1,119 @@
+---
+title: "Import Analysis: Understanding India's Dependence"
+author: "Dr Preet Deep Singh"
+date: "03/10/2020"
+output: 
+  word_document: 
+    toc: yes
+---
+
+## Import Process
+
+
+For prod in Hs codes 
+
+Summarise by code. 
+Filter that code
+Plot 5 years trend 
+
+Filter by code, summarise by country exporting and country importing ; get names
+
+## Including Plots
+
+###This is to test whether anything is working
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+# Country Wise
+For each country, we are trying to see the top products, the products they are dependent on and the ones we are dependent on them for. 
+For example if a country supplies more than 40% of our total requirement for a commodity, we are dependent on them. 
+Similarly if one product constitutes more than 20% of a country's total exports to India, then the country is dependent on that product. 
+```{r graphs, echo=FALSE, message=FALSE, warning=FALSE}
+library(networkD3)
+library(dplyr)
+library(webshot)
+library(htmltools)
+library(htmlwidgets)
+library(stringr)
+library(ggplot2)
+remove(list=ls())
+
+CodeCountry <- read.csv("CodeCountry.csv")
+CodeCountry$HSCode<-ifelse(nchar(CodeCountry$HSCode)==7, paste0(0,CodeCountry$HSCode),CodeCountry$HSCode)#Convert all to 8
+CodeCountry$Y1920P<-as.numeric((CodeCountry$Y1920P))
+#sum(CodeCountry$Y1920P,na.rm=TRUE) #Check335566365osmthing
+#Get 2,4,6 digits from the second column and summarise it later.
+CodeCountry$rupeeamount<-CodeCountry$Y1920P #On 23Jul Dollar conversion
+CodeCountry$dollaramount<-CodeCountry$Y1920P*100000/74000000 #divide by 74 000 000, multiply by 100000
+CodeCountry$Y1920P<-CodeCountry$dollaramount#So that you dont have to change the rest of the code
+CodeCountry<-  select(CodeCountry,Country,HSCode,Y1920P)
+
+CommodityOrg <- read.csv("20200715AllImpDWworking.csv")
+CommodityOrg$HSCode<-ifelse(nchar(CommodityOrg$HSCode)==7, paste0(0,CommodityOrg$HSCode),CommodityOrg$HSCode)#Convert all to 8
+  
+## We need to Get top ten 2 digit(sector) for each country
+
+  CodeCountry$hsc2d<-substr(CodeCountry$HSCode, 1, 2) #Get 2 digits
+  Summary2Dig <- summarize(group_by(CodeCountry, hsc2d,Country), total = sum(Y1920P, na.rm = TRUE))
+  hsnChapter <- read.csv("hsnChapter.csv") #This is to get the names of the Two digit things
+  hsnChapter$HS.Code<-ifelse(nchar(hsnChapter$HS.Code)==1, paste0(0,hsnChapter$HS.Code),hsnChapter$HS.Code)
+  
+  Summary2DigNames<-merge(Summary2Dig,hsnChapter, by.x="hsc2d", by.y="HS.Code",all.x=TRUE,all.y=FALSE)
+  Summary2DigNames$hsc2d<-paste(Summary2DigNames$hsc2d,Summary2DigNames$CodeConvert)
+  Summary2DigNames<-select(Summary2DigNames,Country,hsc2d,total)
+
+  
+  CodeWise<-summarize(group_by(CodeCountry, HSCode), sum1920=sum(Y1920P, na.rm = TRUE))
+CodeCountry<-merge(CodeCountry,CodeWise, by = "HSCode",all.x=TRUE, all.y=FALSE)
+CodeCountry<-mutate(CodeCountry,oftotalprod=Y1920P/sum1920) #In order to get percentage of total
+
+CommodityOrg<-select(CommodityOrg, "HSCode","Commodity")
+CodeCountry<-merge(CodeCountry,CommodityOrg, by = "HSCode")
+CodeCountry<-CodeCountry[order(CodeCountry$Country),]
+  "TEsting a Heading"
+  for (i in 1:length(unique(CodeCountry$Country))){
+    country<-unique(CodeCountry$Country)[i]
+    Summary2DigNames2<-filter(Summary2DigNames,Summary2DigNames$Country==country)
+    links2<-Summary2DigNames2
+    links<-links2[order(-links2$total),]
+    
+    if (nrow(links) > 6) {
+      links <- links[1:6, ]
+      diffrows<-(nrow(links2)-nrow(links))
+      diffvalue<-sum(links2$total)-sum(links$total)
+      links<-as.data.frame(links)
+      links<-rbind(links, list(country, "OtherProducts", diffvalue))
+  #    links<-rbind(links, list(country, paste("Other",diffrows,"products worth USD",prettyNum(diffvalue,big.mark=",", preserve.width="none"),"million" ), diffvalue)) #This has the number also
+    }
+
+library(ggplot2)
+links<-links[order(-links$total),]
+a<-ggplot(links,aes(x=reorder(hsc2d,-total),total)) + geom_bar(stat="identity") + scale_x_discrete(guide = guide_axis(n.dodge=3)) +xlab("Top Chapters")+ylab("Amount in USD million")+ ggtitle(paste("Top import chapters from",country))+ labs(caption=paste("This graph shows the chapter number and description of the chapters that have the highest import value from ",country," for the year 2019-2020.")) + theme(
+  plot.caption = element_text(hjust = 0))+ 
+    theme(plot.title = element_text(size = 8, face = "bold"))
+
+
+cat(paste("#HEADING \nThis is ",country,". \nTotal imports in 2019-20 were USD",prettyNum(sum(links$total, na.rm = TRUE),big.mark=",", preserve.width="none"),"million."))
+
+links3<-mutate(links2, sum=sum(links$total, na.rm = TRUE))
+links3<-mutate(links3, oftotalcountry= total/sum)
+links3<-filter(links3, oftotalcountry>0.25)
+ifelse(length(links3$hsc2d)==1,
+print(paste(country,"is dependent on",length(links3$hsc2d),"product for its exports to India.", "Chapter", links[1,2],"makes up approximately", round((links[1,3])/sum(links$total)*100), "percent of the total imports from",country,"." )),
+print("The country is not dependent on any one product for exports to India"))
+
+
+
+CodeCountry1<-filter(CodeCountry,Country==country)
+CodeCountry1<-filter(CodeCountry1,oftotalprod>0.40)
+
+print(paste("There are ",length(CodeCountry1[,2]),"products for which we import more than 40% of our total requirement from ",country,". These are"))
+#print(unique(CodeCountry1$Commodity))
+print(paste0(unlist(CodeCountry1$Commodity), collapse =" ",","))# This allows it to be in one line
+
+print(paste("The top chapters under which goods are imported from",country, "are displayed in graph below."))
+print(a)
+
+}
