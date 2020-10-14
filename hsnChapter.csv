@@ -1,0 +1,99 @@
+HS Code,Commodity,CodeConvert
+1,LIVE ANIMALS,Animals
+2,MEAT,Meat
+3,FISH,Fish
+4,DAIRY/EGGS,Dairy/Eggs
+5,MISC ANIMAL PRODUCTS,Animal Products
+6,PLANTS,Plants
+7,VEGETABLES,Vegetables
+8,FRUIT & NUTS,Fruit & Nuts
+9,COFFEE/TEA & SPICES,Coffee/Tea & Spices
+10,CEREALS,Cereals
+11,MALT &STARCHES,Malt &Starches
+12,OIL SEEDS ,Oil Seeds 
+13,OTHER VEGETABLE SAPS ,Vegetable Saps 
+14,VEGETABLE PLAITING MATERIALS,Vegetable Plaiting Materials
+15,VEGETABLE FATS AND OILS,Vegetable Oils
+16,MEAT+FISH ,Meat+Fish 
+17,SUGARS,Sugars
+18,COCOA ,Cocoa 
+19,PREPN OF CEREALS,Cereals
+20,PREPN OF VEGETABLES,Vegetable Preparations
+21,MISC PREPN,Other Preparations
+22,BEVERAGES,Beverages
+23,FOOD INDUSTRY RESIDUAL,Food Industry Residual
+24,TOBACCO PRODUCTS,Tobacco
+25,PLASTERING MATERIALS,Plastering Materials
+26,"ORES, SLAG AND ASH",Ores/Ash
+27,MINERALS/FUELS,Minerals/Fuels
+28,INORGANIC CHEMICALS,Inorganic Chemicals
+29,ORGANIC CHEMICALS,Organic Chemicals
+30,PHARMACEUTICAL PRODUCTS,Pharmaceutical Products
+31,FERTILISERS,Fertilisers
+32,DYEING PRODUCTS,Dyeing Products
+33,ESSENTIAL OILS,Essential Oils
+34,SOAPS+WAXES,Soaps+Waxes
+35,ALBUMINOIDAL SUBSTANCES,Albuminoidal Substances
+36,EXPLOSIVES,Explosives
+37,PHOTOGRAPHIC GOODS,Photographic Goods
+38,MISC CHEMICAL PRODUCTS,Misc Chemical Products
+39,PLASTIC ARTICLES,Plastic Articles
+40,RUBBER ARTICLES ,Rubber Articles 
+41,LEATHER,Leather
+42,LEATHER PRODUCTS,Leather Products
+43,FURSKINS & ARTIFICIAL FUR,Furskins & Artificial Fur
+44,WOOD,Wood
+45,CORK ,Cork 
+46,MANF OF STRAW,Manf Of Straw
+47,WOOD PULP,Wood Pulp
+48,PAPER PRODUCTS,Paper Products
+49,PRODUCTS PRINTING INDUSTRY,Products Printing Industry
+50,SILK,Silk
+51,WOOL+ANIMAL HAIR,Wool+Animal Hair
+52,COTTON,Cotton
+53,VEGETABLE FIBRES,Vegetable Fibres
+54,MAN-MADE FILAMENTS,Man-Made Filaments
+55,MAN-MADE STAPLE FIBRES,Man-Made Staple Fibres
+56,SPECIAL YARNS,Special Yarns
+57,CARPETS,Carpets
+58,SPECIAL FABRICS,Special Fabrics
+59,TEXTILEFOR INDUSTRIAL USE,Textile for Industrial Use
+60,KNITTED FABRICS,Knitted Fabrics
+61,CLOTHING ACCESSORIES; KNITTED,Clothing Accessories; Knitted
+62,CLOTHING ACCESORIES; NON KNITTED,Clothing Accesories; Non Knitted
+63,OTHER TEXTILE,Other Textile
+64,FOOTWEAR & PARTS ,Footwear
+65,HEADGEAR & PARTS ,Headgear
+66,UMBRELLAS+WALKING-STICKS,Umbrellas+Walking-Sticks
+67,FEATHERS+ ARTICLES OF HUMAN HAIR,Feathers+ Articles Of Human Hair
+68,CEMENT PRODUCTS,Cement Products
+69,CERAMIC PRODUCTS,Ceramic Products
+70,GLASS & GLASSWARE,Glass & Glassware
+71,JEWELLERY,Jewellery
+72,IRON & STEEL,Iron & Steel
+73,IRON/STEEL PRODUCTS,Iron/Steel Products
+74,COPPER PRODUCTS,Copper Products
+75,NICKEL PRODUCTS,Nickel Products
+76,ALUMINIUM PRODUCTS,Aluminium Products
+78,LEAD PRODUCTS,Lead Products
+79,ZINC PRODUCTS,Zinc Products
+80,TIN PRODUCTS,Tin Products
+81,OTHER BASE METALS,Other Base Metals
+82,CUTLERY,Cutlery
+83,MISC PRODUCTS OF METAL,Misc Metal Products
+84,NUCLEAR REACTORS&MACHINERY,Machinery&Nuclear Reactors
+85,ELECTRICAL MACHINERY & EQUIPMENT ,Electrical Machinery & Equipment 
+86,RAILWAY LOCOMOTIVES,Railway Locomotives
+87,VEHICLES OTHER THAN RAILWAY &PARTS,Vehicles Other Than Railway &Parts
+88,AIRCRAFTS ,Aircrafts 
+89,SHIPS,Ships
+90,OPTICAL; MEDICAL OR SURGICAL INST ,Optical; Medical Or Surgical Inst 
+91,WATCHES ,Watches 
+92,MUSICAL INSTRUMENTS,Musical Instruments
+93,ARMS &AMMUNITION,Arms &Ammunition
+94,FURNITURE,Furniture
+95,"TOYS, GAMES &SPORTS ITEMS",Toys
+96,MISC MANUFACTURED ARTICLES,Misc Manufactured Articles
+97,ANTIQUES,Antiques
+98,PROJECT GOODS,Project Goods
+99,MISC GOODS,Misc Goods
